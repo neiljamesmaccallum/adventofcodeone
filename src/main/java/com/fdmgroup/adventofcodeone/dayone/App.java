@@ -1,4 +1,4 @@
-package com.fdmgroup.adventofcodeone;
+package com.fdmgroup.adventofcodeone.dayone;
 
 import java.util.Arrays;
 import java.util.List;
