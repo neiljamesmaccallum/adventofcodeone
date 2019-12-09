@@ -19,5 +19,7 @@ public class App {
 				131466, 89977, 124467, 114318, 84544, 53584, 87786, 131991, 138445, 70673);
 		int totalFuelRequired = FuelCalculator.calculateFuelForModules(moduleMasses);
 		System.out.println(totalFuelRequired);
+		int advancedTotalFuelRequired = AdvancedFuelCalculator.fuelRequiredForModulesWithMasses(moduleMasses);
+		System.out.println(advancedTotalFuelRequired);
 	}
 }
