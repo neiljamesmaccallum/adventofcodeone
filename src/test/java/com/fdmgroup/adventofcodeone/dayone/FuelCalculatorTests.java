@@ -2,14 +2,10 @@ package com.fdmgroup.adventofcodeone.dayone;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
-
-import com.fdmgroup.adventofcodeone.dayone.FuelCalculator;
 
 public class FuelCalculatorTests {
 	
