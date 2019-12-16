@@ -85,22 +85,21 @@ public class AdvancedIntCodeProcessor {
 			} else {
 				firstParameter = intCodeReading.get(intCodeReading.get(pointerPosition + 1));
 			}
-			operateIfOpCodeIsThreeAtPointer(intCodeReading, input);
+			operateIfOpCodeIsThreeAtPointer(input);
 		}
-		System.err.println(intCodeReading);
 		return outputs;
 	}
 
-	private static void operateIfOpCodeIsThreeAtPointer(List<Integer> intCode, int input) {
+	private static void operateIfOpCodeIsThreeAtPointer(int input) {
 		if (opCode == 3) {
-			intCodeReading.set(intCodeReading.get(pointerPosition+1), input);
+			intCodeReading.set(intCodeReading.get(pointerPosition + 1), input);
 			pointerPosition += 2;
 		} else {
-			operateIfOpCodeIsFourAtPointer(intCodeReading);
+			operateIfOpCodeIsFourAtPointer();
 		}
 	}
 
-	private static void operateIfOpCodeIsFourAtPointer(List<Integer> intCode) {
+	private static void operateIfOpCodeIsFourAtPointer() {
 		if (opCode == 4) {
 			if (firstParameterMode == 1) {
 				outputs.add(intCodeReading.get(pointerPosition + 1));
@@ -109,11 +108,11 @@ public class AdvancedIntCodeProcessor {
 			}
 			pointerPosition += 2;
 		} else {
-			operateIfOpCodeIsFiveAtPointer(intCodeReading);
+			operateIfOpCodeIsFiveAtPointer();
 		}
 	}
 
-	private static void operateIfOpCodeIsFiveAtPointer(List<Integer> intCode) {
+	private static void operateIfOpCodeIsFiveAtPointer() {
 		if (secondParameterMode == 1) {
 			secondParameter = intCodeReading.get(pointerPosition + 2);
 		} else {
@@ -125,36 +124,49 @@ public class AdvancedIntCodeProcessor {
 			} else {
 				pointerPosition += 3;
 			}
-		} else if (opCode == 6) {
+		} else {
+			operateIfOpCodeIsSixAtPointer();
+		}
+	}
+
+	private static void operateIfOpCodeIsSixAtPointer() {
+		if (opCode == 6) {
 			if (firstParameter == 0) {
 				pointerPosition = secondParameter;
 			} else {
 				pointerPosition += 3;
 			}
 		} else {
-			Integer thirdParameter = intCodeReading.get(pointerPosition + 3);
-			if (opCode == 7) {
-				if (firstParameter < secondParameter) {
-					intCodeReading.set(thirdParameter, 1);
-				} else {
-					intCodeReading.set(thirdParameter, 0);
-				}
-			}
-			if (opCode == 8) {
-				if (firstParameter == secondParameter) {
-					intCodeReading.set(thirdParameter, 1);
-				} else {
-					intCodeReading.set(thirdParameter, 0);
-				}
-			}
-			if (opCode == 1) {
-				intCodeReading.set(thirdParameter, firstParameter + secondParameter);
-			}
-			if (opCode == 2) {
-				intCodeReading.set(thirdParameter, firstParameter * secondParameter);
-			}
-			pointerPosition += 4;
+			operateIfOpCodeIsSevenOrEightAtPointer();
 		}
+	}
+
+	private static void operateIfOpCodeIsSevenOrEightAtPointer() {
+		Integer thirdParameter = intCodeReading.get(pointerPosition + 3);
+		if (opCode == 7) {
+			if (firstParameter < secondParameter) {
+				intCodeReading.set(thirdParameter, 1);
+			} else {
+				intCodeReading.set(thirdParameter, 0);
+			}
+		} else if (opCode == 8) {
+			if (firstParameter == secondParameter) {
+				intCodeReading.set(thirdParameter, 1);
+			} else {
+				intCodeReading.set(thirdParameter, 0);
+			}
+		} else {
+			operateIfOpCodeIsOneOrTwoAtPointer(thirdParameter);
+		}
+	}
+
+	private static void operateIfOpCodeIsOneOrTwoAtPointer(Integer thirdParameter) {
+		if (opCode == 1) {
+			intCodeReading.set(thirdParameter, firstParameter + secondParameter);
+		} else if (opCode == 2) {
+			intCodeReading.set(thirdParameter, firstParameter * secondParameter);
+		}
+		pointerPosition += 4;
 	}
 
 	private static void getOpcodeAndParamaterModesForCurrentPositionIn(List<Integer> intCode) {
