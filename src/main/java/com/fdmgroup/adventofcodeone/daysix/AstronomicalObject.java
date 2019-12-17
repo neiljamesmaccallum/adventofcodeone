@@ -44,29 +44,35 @@ public class AstronomicalObject {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		AstronomicalObject other = (AstronomicalObject) obj;
 		if (label == null) {
-			if (other.label != null)
+			if (other.label != null) {
 				return false;
-		} else if (!label.equals(other.label))
+			}
+		} else if (!label.equals(other.label)) {
 			return false;
+		}
 		if (satelites == null) {
-			if (other.satelites != null)
+			if (other.satelites != null) {
 				return false;
+			}
 		} else {
-			for(AstronomicalObject othersatellite: other.satelites) {
-				if(!satelites.contains(othersatellite)) {
+			for (AstronomicalObject othersatellite : other.satelites) {
+				if (!satelites.contains(othersatellite)) {
 					return false;
 				}
 			}
-			for(AstronomicalObject satellite: satelites) {
-				if(!other.satelites.contains(satellite)) {
+			for (AstronomicalObject satellite : satelites) {
+				if (!other.satelites.contains(satellite)) {
 					return false;
 				}
 			}
@@ -74,5 +80,9 @@ public class AstronomicalObject {
 		return true;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "AstronomicalObject [satelites=" + satelites.size() + ", label=" + label + "]";
+	}
+
 }
