@@ -23,7 +23,6 @@ public class OrbitalMapGenerator {
 			if (!orbitalMap.containsKey(orbittingLabel)) {
 				orbitalMap.put(orbittingLabel, new AstronomicalObject(orbittingLabel));
 			}
-			AstronomicalObject orbitting = orbitalMap.get(orbittingLabel);
 			if (!orbitalMap.containsKey(orbitterLabel)) {
 				orbitalMap.put(orbitterLabel, new AstronomicalObject(orbitterLabel));
 			}
